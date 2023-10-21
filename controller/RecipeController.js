@@ -1,9 +1,11 @@
+const { query } = require("express");
 const db = require("../model");
+const RecipeQueryBuilder = require("./querybuilder/RecipeQueryBuilder");
 const RecipeResource = require("../resource/RecipeResource");
 
 exports.index = async (req, res) => {
-    console.log(req.params);
-    let sql = "SELECT * FROM recipes";
+    let builder = new RecipeQueryBuilder();
+    let sql = builder.getQuery(req);
 
     return db.all(sql, [], (err, rows) => {
         if (err) {

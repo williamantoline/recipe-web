@@ -44,9 +44,9 @@ db.run('CREATE TABLE recipes( \
     FOREIGN KEY (user_id) REFERENCES users(id)\
 )', (err) => {
     let insert = 'INSERT INTO recipes (user_id, title, description, created_at) VALUES (?,?,?,?)';
-    db.run(insert, [1, "Resep 1", "Description 1", 1000]);
-    db.run(insert, [1, "Resep 2", "Description 2", 1000]);
-    db.run(insert, [2, "Resep 3", "Description 3", 1000]);
+    db.run(insert, [1, "Resep 2", "Description 1", 1004]);
+    db.run(insert, [1, "Resep 3", "Description 2", 1000]);
+    db.run(insert, [2, "Resep 1", "Description 3", 1002]);
 });
 
 db.run('CREATE TABLE recipe_steps( \
