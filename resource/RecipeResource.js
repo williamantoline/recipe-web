@@ -1,9 +1,10 @@
 const db = require("../model");
+const UserResource = require("./UserResource");
 
 class RecipeResource {
-    constructor(recipe, recipe_steps) {
+    constructor(recipe, user, recipe_steps) {
         this.id = recipe.id;
-        this.user_id = recipe.user_id;
+        this.user = new UserResource(user);
         this.title = recipe.title;
         this.description = recipe.description;
         this.created_at = recipe.created_at;

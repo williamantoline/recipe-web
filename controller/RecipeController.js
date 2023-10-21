@@ -24,15 +24,22 @@ exports.show = async (req, res) => {
           res.status(400).json({"error":err.message});
           return;
         }
-        db.all(`SELECT * FROM recipe_steps where recipe_id = ?`, [req.params.id], (err, recipe_steps) => {
+        db.get(`SELECT * FROM users where id = ?`, [recipe.user_id], (err, user) => {
             if (err) {
                 res.status(400).json({"error":err.message});
                 return;
             }
-            res.status(200).json({
-                message: "success",
-                data: new RecipeResource(recipe, recipe_steps),
+            db.all(`SELECT * FROM recipe_steps where recipe_id = ?`, [req.params.id], (err, recipe_steps) => {
+                if (err) {
+                    res.status(400).json({"error":err.message});
+                    return;
+                }
+                res.status(200).json({
+                    message: "success",
+                    data: new RecipeResource(recipe, user, recipe_steps),
+                });
             });
-        });
+        })
+        
       });
 }
